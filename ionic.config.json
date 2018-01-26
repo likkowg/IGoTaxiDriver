@@ -1,0 +1,8 @@
+{
+  "name": "IGoTaxiDriver",
+  "app_id": "bbf16785",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}

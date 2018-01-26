@@ -1,0 +1,89 @@
+page-login,
+.login {
+    .fb {
+        //color: white;
+        /*background-color: white;
+        text-transform: uppercase;
+        font-size: 75%;
+        border: 2px solid #3b5998;
+        padding: 6% 23%;
+        margin: auto;
+        white-space: nowrap;
+        text-align: center;
+        font-family: "SanFranciscoText-Regular";
+        font-weight: bold;
+        letter-spacing: 0.3em;*/
+        //texr-colo
+        width: 45%;
+        //height: 10%;
+        font-size: 150%;
+        border: 2px solid #3b5998;
+    }
+    .gplus {
+        //color: #d34836;
+        /*background-color: white;
+        text-transform: uppercase;
+        font-size: 75%;
+        border: 2px solid #3b5998;
+        padding: 6% 23%;
+        margin: auto;
+        white-space: nowrap;
+        text-align: center;
+        
+        
+        letter-spacing: 0.3em;*/
+        //texr-colo
+        border: 2px solid #d34836;
+        font-family: "SanFranciscoText-Regular";
+        font-weight: bold;
+        //background-color: white;
+        //background: white;
+        //color: white;
+        width: 45%;
+        //height: 10%;
+        font-size: 150%;
+    }
+
+    .loginButton{
+        padding-top: 30px;
+        padding-bottom: 10px;
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+
+    .form{
+        padding-top: 0px;
+        padding-bottom: 10px;
+        padding-right: 10px;
+        padding-left: 10px;
+        ion-item{
+            padding-top: 0px;
+        }
+    }
+
+    .divider{
+       // border: 2px solid #128f74;
+        p{
+        color: #a7a7a7;
+        font-size: 200%;
+        font-style: bold;
+        padding-top: 15px;
+        padding-bottom: 0px;
+        padding-right: 10px;
+        padding-left: 10px;
+        }
+    }
+
+    .buttons{
+        padding-top: 20px;
+        p{
+            text-align: center;
+            color: gray;
+            font-style: italic;
+            font-size: 110%;
+            padding-top: 15px;
+            padding-bottom: 0px;
+        }
+    }
+
+}

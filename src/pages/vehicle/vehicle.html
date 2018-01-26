@@ -1,0 +1,116 @@
+<!--
+  Generated template for the VehiclePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Vehiculo</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="save()">
+        <ion-icon name="checkmark"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+    <div text-center> sdf
+          
+      </div>
+  <ion-grid text-center>
+    <ion-col class="ion1" text-center>
+      <ion-row text-center>
+        <div text-center class="div1"> sdf
+          
+        </div>
+      </ion-row>
+    </ion-col>
+    <ion-col class="ion2">
+
+        <ion-list class="list-full-border">
+
+          <ion-item>
+            <ion-icon item-left primary name="md-easel"></ion-icon>
+            <ion-label stacked color="primary">Placa</ion-label>
+            <ion-input type="text" [(ngModel)]="user.plate"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-icon item-left primary name="code-working"></ion-icon>
+            <ion-label stacked color="primary">Marca</ion-label>
+            <ion-input type="text" [(ngModel)]="user.brand"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-icon item-left primary name="closed-captioning"></ion-icon>
+            <ion-label stacked color="primary">Modelo</ion-label>
+            <ion-input type="text" [(ngModel)]="user.model"></ion-input>
+          </ion-item>
+
+          <ion-item *ngIf="types">
+            <ion-icon item-left primary name="car"></ion-icon>
+            <ion-label stacked color="primary">Tipo</ion-label>
+            <ion-select [(ngModel)]="user.type">
+              <ion-option value="{{ type }}" *ngFor="let type of types">
+                {{ type }}
+              </ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+    </ion-col>
+  </ion-grid>
+
+
+  <!-- Cover and profile picture 
+  <div class="driver-top primary-bg" text-center no-padding>
+    <div class="driver-picture">
+      <img class="profile-picture circle" src="{{ user.vehiclePhotoURL }}" (click)="chooseFile()">
+      <form ngNoForm hidden>
+        <input id="vehicle" name="file" type="file" (change)="upload()">
+      </form>
+    </div>
+  </div>
+
+  
+  User information 
+  <ion-list class="list-full-border">
+
+    <ion-item>
+      <ion-icon item-left primary name="md-easel"></ion-icon>
+      <ion-label stacked color="primary">Placa</ion-label>
+      <ion-input type="text" [(ngModel)]="user.plate"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon item-left primary name="code-working"></ion-icon>
+      <ion-label stacked color="primary">Marca</ion-label>
+      <ion-input type="text" [(ngModel)]="user.brand"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon item-left primary name="closed-captioning"></ion-icon>
+      <ion-label stacked color="primary">Modelo</ion-label>
+      <ion-input type="text" [(ngModel)]="user.model"></ion-input>
+    </ion-item>
+
+    <ion-item *ngIf="types">
+      <ion-icon item-left primary name="car"></ion-icon>
+      <ion-label stacked color="primary">Tipo</ion-label>
+      <ion-select [(ngModel)]="user.type">
+        <ion-option value="{{ type }}" *ngFor="let type of types">
+          {{ type }}
+        </ion-option>
+      </ion-select>
+    </ion-item>
+ 
+  </ion-list> -->
+</ion-content>

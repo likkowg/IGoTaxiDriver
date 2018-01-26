@@ -1,0 +1,93 @@
+<!--
+  Generated template for the JobHistoryPage page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Historial</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="primary-bg">
+  <ion-grid class="stats light-bg">
+    <ion-row>
+      <ion-col text-center>
+        <span class="label">Hoy</span>
+        <h4>{{ stats.today }}</h4>
+      </ion-col>
+      <ion-col text-center>
+        <span class="label">Ayer</span>
+        <h4>{{ stats.yesterday }}</h4>
+      </ion-col>
+      <ion-col text-center>
+        <span class="label">Este Mes</span>
+        <h4>{{ stats.thisMonth }}</h4>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col text-center>
+        <span class="label">Mes Pasado</span>
+        <h4>{{ stats.lastMonth }}</h4>
+      </ion-col>
+      <ion-col text-center>
+        <span class="label">Este Año</span>
+        <h4>{{ stats.thisYear }}</h4>
+      </ion-col>
+      <ion-col text-center>
+        <span class="label">Año Pasado</span>
+        <h4>{{ stats.lastYear }}</h4>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- list of history trips -->
+  <ion-list class="dark-list list-no-border">
+    <ion-item class="primary-bg" *ngFor="let trip of trips">
+      <ion-card>
+        <agm-map [latitude]="trip.destination.location.lat" [longitude]="trip.destination.location.lng" [zoom]="16" [mapDraggable]="false"
+          [disableDoubleClickZoom]="true" [streetViewControl]="false" [zoomControl]="false">
+          <agm-marker [latitude]="trip.destination.location.lat" [longitude]="trip.destination.location.lng"></agm-marker>
+        </agm-map>
+
+        <ion-fab right top>
+          <button ion-fab>
+            <ion-icon name="pin"></ion-icon>
+          </button>
+        </ion-fab>
+
+        <ion-list class="list-no-border address-block">
+          <ion-item>
+            <div item-left text-center>
+              <span class="round"></span>
+            </div>
+            <div>{{ trip.origin.vicinity }}</div>
+          </ion-item>
+          <ion-item>
+            <div item-left text-center>
+              <ion-icon name="pin" color="danger"></ion-icon>
+            </div>
+            <div>{{ trip.destination.vicinity }}</div>
+          </ion-item>
+        </ion-list>
+
+        <ion-item>
+          <span item-left>{{ trip.pickedUpAt | amDateFormat: 'YYYY-MM-DD HH:mm'}}</span>
+
+          <button ion-button icon-left clear item-end>
+            <ion-icon name="navigate"></ion-icon>
+            Ver Detalles
+          </button>
+        </ion-item>
+      </ion-card>
+    </ion-item>
+
+  </ion-list>
+</ion-content>

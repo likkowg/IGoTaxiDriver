@@ -1,0 +1,60 @@
+page-login-home {
+    .up{
+    //border: 2px solid #ffa733;
+    height: 50vh;
+    width: 100%;
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+        //overflow: auto;
+    }
+
+    .img{
+        background-image: url("../assets/img/MainBack.png");
+        height: 100%;
+        width: 100%;
+        background-repeat: no-repeat;
+        background-size: 100%;
+    }
+
+    .down{
+    //border: 2px solid #128f74;
+    height: 35;
+    width: 100%;
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    padding-left: 10px;
+    }
+
+    .description{
+    padding-top: 0px;
+    padding-right: 10px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    font-size: 70%;
+    text-align: center;
+    font-family: 'Verdana';
+    color: grey;
+    font-style: italic;
+    }
+
+    h1{
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    font-size: 300%;
+    color: #494949;
+    vertical-align: center;
+    }
+
+    ion-footer{
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    }
+
+}

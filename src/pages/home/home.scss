@@ -1,0 +1,36 @@
+page-home,
+.home {
+    .img{
+        background-image: url("../assets/img/MainBack.png");
+        height: 100%;
+        width: 100%;
+        background-repeat: no-repeat;
+        background-size: 100%;
+    }
+
+    .map{
+        //border: 2px solid #3369ff;
+        height: 35vh;
+        width: 100%;
+        padding-top: 0px;
+        padding-right: 0px;
+        padding-bottom: 0px;
+        padding-left: 0px;
+            //overflow: auto;
+        }
+
+        .info{
+            //border: 2px solid #ffa733;
+            height: 52vh;
+            width: 100%;
+            padding-top: 0px;
+            padding-right: 0px;
+            padding-bottom: 0px;
+            padding-left: 0px;
+                //overflow: auto;
+            }
+            .border{
+                border: 2px solid #3d3d3d;
+            }
+        
+}

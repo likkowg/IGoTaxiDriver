@@ -1,0 +1,55 @@
+<!--
+  Generated template for the LoginPage page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Ingreso</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <div text-center class="buttons">
+    <p> Ingresa con tus redes sociales</p>
+    <button ion-button icon-only class="fb" color="fb-color" outline large (click)="loginWithFacebook()">
+      <ion-icon name="logo-facebook"></ion-icon>
+    </button>
+    <button ion-button icon-only class="gplus" color="gplus" outline large (click)="loginWithGoogle()">
+      <ion-icon name="logo-googleplus"></ion-icon>
+    </button>
+    <p>
+      O
+    </p>
+    <p>
+      Ingresa con tu email y contraseña
+    </p>
+  </div>
+
+  <div class="form">
+    <ion-item>
+      <ion-icon item-left primary name="mail"></ion-icon>
+      <ion-label floating primary>Email</ion-label>
+      <ion-input type="text" [(ngModel)]="email"></ion-input>
+
+    </ion-item>
+    <ion-item>
+        <ion-icon item-left primary name="eye-off"></ion-icon>
+      <ion-label floating primary>Contraseña</ion-label>
+      <ion-input type="password" [(ngModel)]="password"></ion-input>
+    </ion-item>
+
+  </div>
+  <div class="loginButton">
+    <button ion-button block (click)="login()">Ingresar</button>
+  </div>
+
+</ion-content>
+
+<ion-footer padding>
+
+</ion-footer>
