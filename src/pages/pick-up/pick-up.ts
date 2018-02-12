@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 import { DropOffPage } from '../drop-off/drop-off';
 import { TripService } from "../../services/trip-service";
 import { IonicPage } from 'ionic-angular/navigation/ionic-page';
+import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
 /*
  Generated class for the PickUpPage page.
 
@@ -18,7 +19,7 @@ export class PickUpPage {
   trip: any;
   passenger: any;
 
-  constructor(public nav: NavController, public tripService: TripService) {
+  constructor(public nav: NavController, public tripService: TripService, private launchNavigator: LaunchNavigator) {
     this.trip = tripService.getCurrentTrip();
     tripService.getPassenger(this.trip.passengerId).take(1).subscribe(snapshot => {
       this.passenger = snapshot;
@@ -29,5 +30,22 @@ export class PickUpPage {
   pickup() {
     this.tripService.pickUp(this.trip.$key);
     this.nav.setRoot(DropOffPage);
+  }
+
+  navigate(destination) {
+    let options: LaunchNavigatorOptions = {
+      //start: 'London, ON',
+      transportMode: this.launchNavigator.TRANSPORT_MODE.TRANSIT,
+
+
+      //app: this.launchNavigator.APP.UBER
+    };
+
+    //let coordenates: string = latitude + ", " + longitute;
+    this.launchNavigator.navigate(destination, options)
+      .then(
+      success => console.log('Launched navigator'),
+      error => console.log('Error launching navigator', error)
+      );
   }
 }

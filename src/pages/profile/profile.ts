@@ -5,20 +5,29 @@ import * as firebase from 'firebase';
 import { SettingService } from "../../services/setting-service";
 import { HomePage } from "../home/home";
 import { VehiclePage } from '../vehicle/vehicle';
+import { Storage } from '@ionic/storage';
+import { Platform } from 'ionic-angular/platform/platform';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Crop } from '@ionic-native/crop';
+import { File } from '@ionic-native/file';
+import { DomSanitizer } from '@angular/platform-browser';
+
 /**
  * Generated class for the ProfilePage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
+declare var cordova: any;
 
 @Component({
   selector: 'page-profile',
   templateUrl: 'profile.html',
 })
-export class ProfilePage {
 
+export class ProfilePage {
+  storageDirectory: string = '';
+  uid: string;
   user = {
     name: '',
     photoURL: '',
@@ -33,11 +42,31 @@ export class ProfilePage {
   };
   types: Array<any> = [];
 
-  constructor(public nav: NavController, public authService: AuthService, public navParams: NavParams,
-    public toastCtrl: ToastController, public loadingCtrl: LoadingController, private crop: Crop,
-    public settingService: SettingService, public alertCtrl: AlertController) {
-    let user = navParams.get('user');
+  private galleryOptions: CameraOptions = {
+    allowEdit: false,
+    destinationType: this.camera.DestinationType.FILE_URI,
+    sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+    //targetWidth: 720,
+    //targetHeight: 720,
+    correctOrientation: true,
+    quality: 90
 
+  }
+  private basePath: string = '/users/';
+
+  constructor(public nav: NavController, public authService: AuthService, public navParams: NavParams,
+    public toastCtrl: ToastController, public loadingCtrl: LoadingController,
+    public settingService: SettingService, public alertCtrl: AlertController,
+    private storage: Storage, public platform: Platform, private camera: Camera, private crop: Crop, 
+    private file: File, private _sanitizer: DomSanitizer) {
+
+
+    this.platform.ready().then(() => {
+      // make sure this is on a device, not an emulation (e.g. chrome tools device mode)
+    });
+
+    let user = navParams.get('user');
+    this.uid = user.uid;
     // list of vehicle types
     this.settingService.getVehicleType().take(1).subscribe(snapshot => {
       ''
@@ -91,24 +120,6 @@ export class ProfilePage {
     document.getElementById('avatar').click();
   }
 
-  // upload thumb for item
-  upload() {
-    // Create a root reference
-    let storageRef = firebase.storage().ref();
-    let loading = this.loadingCtrl.create({
-      content: 'Por favor espere...'
-    });
-    loading.present();
-
-    for (let selectedFile of [(<HTMLInputElement>document.getElementById('avatar')).files[0]]) {
-      let path = '/users/' + Date.now() + `${selectedFile.name}`;
-      let iRef = storageRef.child(path);
-      iRef.put(selectedFile).then((snapshot) => {
-        loading.dismiss();
-        this.user.photoURL = snapshot.downloadURL;
-      });
-    }
-  }
 
   // show alert with message
   showAlert(message) {
@@ -126,11 +137,48 @@ export class ProfilePage {
     });
   }
 
-  cropImg() {
-    this.crop.crop('C:/Users/Miriam Terrones/Pictures/Saved Pictures/test.jpg', {quality: 75, targetHeight: 200, targetWidth: 200})
-    .then(
-      newImage => console.log('new image path is: ' + newImage),
-      error => console.error('Error cropping image', error)
-    );
+  selectProfilePicture() {
+    this.camera.getPicture(this.galleryOptions).then((imageUri) => {
+      alert(imageUri);
+      this.cropImage(imageUri, 90, 200, 200).then((croppedImage) => {
+        this.file.resolveLocalFilesystemUrl(croppedImage).then((newImageUri) => {
+          alert(JSON.stringify(newImageUri));
+          let dirPath = newImageUri.nativeURL;
+          let dirPathSegments = dirPath.split('/');
+          dirPathSegments.pop();
+          dirPath = dirPathSegments.join('/');
+          alert(dirPath);
+          this.file.readAsArrayBuffer(dirPath, newImageUri.name).then(async (buffer) => {
+            alert("Prepare to upload" + dirPath + newImageUri.name);
+            await this.upload(buffer);
+          }).catch((err) => {
+            alert(JSON.stringify(err));
+          })
+        })
+      });
+    });
+  }
+
+  async upload(buffer) {
+    let blob = new Blob([buffer], { type: "images/jpeg" })
+    alert("blob file:" + blob);
+    let storage = firebase.storage();
+    storage.ref('users/' + "Profile_" + this.uid + ".jpg").put(blob).then((d) => {
+      alert("Done");
+      this.user.photoURL = d.downloadURL;
+    }).catch((err) => {
+      alert(JSON.stringify(err));
+    });
+  }
+
+
+  cropImage(image: string, quality: number, targetHeight: number, targetWidth: number) {
+    return this.crop.crop(image, { quality, targetHeight, targetWidth });
+  }
+
+  getBackground(image) {
+    console.log(`url(${image})`)
+    return this._sanitizer.bypassSecurityTrustStyle(`url(${image})`);
   }
 }
+

@@ -21,54 +21,43 @@
 </ion-header>
 
 
-<ion-content>
+<ion-content parallax-header>
 
-    <div text-center> sdf
-          
-      </div>
-  <ion-grid text-center>
-    <ion-col class="ion1" text-center>
-      <ion-row text-center>
-        <div text-center class="div1"> sdf
-          
-        </div>
-      </ion-row>
-    </ion-col>
-    <ion-col class="ion2">
+  <div class="header-image" (click)="selectVehiculeImage()"></div>
 
-        <ion-list class="list-full-border">
+  <div class="main-content">
+<!--     <img src="{{ user.vehiclePhotoURL }}" class="dp" (click)="selectVehiculeImage()"> -->
 
-          <ion-item>
-            <ion-icon item-left primary name="md-easel"></ion-icon>
-            <ion-label stacked color="primary">Placa</ion-label>
-            <ion-input type="text" [(ngModel)]="user.plate"></ion-input>
-          </ion-item>
+<!--     <h1 text-center>{{user?.brand}} {{user?.model}}</h1> -->
+<img src="{{ user.vehiclePhotoURL }}" class="dp" (click)="selectProfilePicture()">
+    <ion-item>
+      <ion-icon item-left primary name="md-easel"></ion-icon>
+      <ion-label stacked color="primary">Placa</ion-label>
+      <ion-input type="text" [(ngModel)]="user.plate"></ion-input>
+    </ion-item>
 
-          <ion-item>
-            <ion-icon item-left primary name="code-working"></ion-icon>
-            <ion-label stacked color="primary">Marca</ion-label>
-            <ion-input type="text" [(ngModel)]="user.brand"></ion-input>
-          </ion-item>
+    <ion-item>
+      <ion-icon item-left primary name="code-working"></ion-icon>
+      <ion-label stacked color="primary">Marca</ion-label>
+      <ion-input type="text" [(ngModel)]="user.brand"></ion-input>
+    </ion-item>
 
-          <ion-item>
-            <ion-icon item-left primary name="closed-captioning"></ion-icon>
-            <ion-label stacked color="primary">Modelo</ion-label>
-            <ion-input type="text" [(ngModel)]="user.model"></ion-input>
-          </ion-item>
+    <ion-item>
+      <ion-icon item-left primary name="closed-captioning"></ion-icon>
+      <ion-label stacked color="primary">Modelo</ion-label>
+      <ion-input type="text" [(ngModel)]="user.model"></ion-input>
+    </ion-item>
 
-          <ion-item *ngIf="types">
-            <ion-icon item-left primary name="car"></ion-icon>
-            <ion-label stacked color="primary">Tipo</ion-label>
-            <ion-select [(ngModel)]="user.type">
-              <ion-option value="{{ type }}" *ngFor="let type of types">
-                {{ type }}
-              </ion-option>
-            </ion-select>
-          </ion-item>
-        </ion-list>
-    </ion-col>
-  </ion-grid>
-
+    <ion-item *ngIf="types">
+      <ion-icon item-left primary name="car"></ion-icon>
+      <ion-label stacked color="primary">Tipo</ion-label>
+      <ion-select [(ngModel)]="user.type">
+        <ion-option value="{{ type }}" *ngFor="let type of types">
+          {{ type }}
+        </ion-option>
+      </ion-select>
+    </ion-item>
+  </div>
 
   <!-- Cover and profile picture 
   <div class="driver-top primary-bg" text-center no-padding>

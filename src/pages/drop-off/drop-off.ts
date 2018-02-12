@@ -4,6 +4,7 @@ import { HomePage } from '../home/home';
 import { TripService } from "../../services/trip-service";
 import { DealService } from "../../services/deal-service";
 import { IonicPage } from 'ionic-angular/navigation/ionic-page';
+import { LaunchNavigatorOptions, LaunchNavigator } from '@ionic-native/launch-navigator';
 
 /*
  Generated class for the DropOffPage page.
@@ -20,7 +21,7 @@ export class DropOffPage {
   public trip: any;
 
   constructor(public nav: NavController, public tripService: TripService, public alertCtrl: AlertController,
-              public dealService: DealService) {
+              public dealService: DealService, private launchNavigator: LaunchNavigator) {
     this.trip = tripService.getCurrentTrip();
   }
 
@@ -45,5 +46,22 @@ export class DropOffPage {
     });
 
     prompt.present();
+  }
+
+  navigate(destination) {
+    let options: LaunchNavigatorOptions = {
+      //start: 'London, ON',
+      transportMode: this.launchNavigator.TRANSPORT_MODE.TRANSIT,
+
+
+      //app: this.launchNavigator.APP.UBER
+    };
+
+    //let coordenates: string = latitude + ", " + longitute;
+    this.launchNavigator.navigate(destination, options)
+      .then(
+      success => console.log('Launched navigator'),
+      error => console.log('Error launching navigator', error)
+      );
   }
 }

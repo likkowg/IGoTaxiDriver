@@ -4,7 +4,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { DEAL_TIMEOUT } from "../../services/constants";
 import { PlaceService } from "../../services/place-service";
 import { IonicPage } from 'ionic-angular/navigation/ionic-page';
-
+import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
 /*
  Generated class for the ModalJobPage page.
 
@@ -23,7 +23,7 @@ export class ModalJobPage {
   public remainingTime = DEAL_TIMEOUT;
 
   constructor(public viewCtrl: ViewController, public navParams: NavParams, public placeService: PlaceService,
-              public geolocation: Geolocation) {
+              public geolocation: Geolocation, private launchNavigator: LaunchNavigator) {
     this.job = navParams.get('deal');
 
     // get current location
@@ -71,4 +71,5 @@ export class ModalJobPage {
     // close and accept a job
     this.viewCtrl.dismiss(true);
   }
+
 }

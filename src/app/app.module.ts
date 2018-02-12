@@ -10,6 +10,10 @@ import { IonicStorageModule } from '@ionic/storage';
 import { HttpModule } from '@angular/http';
 import { MomentModule } from 'angular2-moment';
 import { Geolocation } from '@ionic-native/geolocation';
+import { Camera } from '@ionic-native/camera';
+import { File } from '@ionic-native/file';
+import { Crop } from '@ionic-native/crop';
+import { LaunchNavigator } from '@ionic-native/launch-navigator';
 ///////////////////////////////////////////////////////////////////////
 
 
@@ -50,7 +54,6 @@ import { SettingService } from '../services/setting-service';
 import { DriverService } from '../services/driver-service';
 import { AuthService } from '../services/auth-service';
 import { LocationTrackerProvider } from '../providers/location-tracker/location-tracker';
-import { Crop } from '@ionic-native/crop';
 ///////////////////////////////////////////////////////////////////////
 
 
@@ -71,6 +74,7 @@ import { UserPage } from '../pages/user/user';
 import { LoginHomePage } from '../pages/login-home/login-home';
 import { VehiclePage } from '../pages/vehicle/vehicle';
 import { SettingsPage } from '../pages/settings/settings';
+import { ParallaxHeaderDirective } from '../directives/parallax-header/parallax-header';
 ///////////////////////////////////////////////////////////////////////
 
 
@@ -108,7 +112,8 @@ export const firebaseConfig = {
     LoginHomePage,
     VehiclePage,
     ProfilePage,
-    ParallaxDirective
+    ParallaxDirective,
+    ParallaxHeaderDirective
 
   ],
   imports: [
@@ -141,7 +146,8 @@ export const firebaseConfig = {
     UserPage,
     LoginHomePage,
     VehiclePage,
-    ProfilePage
+    ProfilePage,
+    
   ],
   providers: [
     StatusBar,
@@ -158,7 +164,10 @@ export const firebaseConfig = {
     LocalNotifications,
     LocationTrackerProvider,
     BackgroundGeolocation,
+    Camera,
     Crop,
+    File,
+    LaunchNavigator,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })

@@ -8,6 +8,9 @@ import { AuthService } from '../../services/auth-service';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase';
+import { Camera, CameraOptions } from '@ionic-native/camera';
+import { Crop } from '@ionic-native/crop';
+import { DomSanitizer } from '@angular/platform-browser';
 
 /**
  * Generated class for the VehiclePage page.
@@ -21,7 +24,7 @@ import * as firebase from 'firebase';
   templateUrl: 'vehicle.html',
 })
 export class VehiclePage {
-
+  uid: string;
   user = {
     name: '',
     photoURL: '',
@@ -38,10 +41,11 @@ export class VehiclePage {
   types: Array<any> = [];
 
   constructor(public nav: NavController, public authService: AuthService, public navParams: NavParams,
-    public toastCtrl: ToastController, public loadingCtrl: LoadingController,
-    public settingService: SettingService, public alertCtrl: AlertController, public afAuth: AngularFireAuth) {
+    public toastCtrl: ToastController, public loadingCtrl: LoadingController, private camera: Camera, private crop: Crop,
+    public settingService: SettingService, public alertCtrl: AlertController, public afAuth: AngularFireAuth,
+    private _sanitizer: DomSanitizer) {
     let user = navParams.get('user');
-
+    this.uid = user.uid;
     // list of vehicle types
     this.settingService.getVehicleType().take(1).subscribe(snapshot => {
       ''
@@ -93,25 +97,6 @@ export class VehiclePage {
     document.getElementById('vehicle').click();
   }
 
-  // upload thumb for item
-  upload() {
-    // Create a root reference
-    let storageRef = firebase.storage().ref();
-    let loading = this.loadingCtrl.create({
-      content: 'Por favor espere...'
-    });
-    loading.present();
-
-    for (let selectedFile of [(<HTMLInputElement>document.getElementById('vehicle')).files[0]]) {
-      let path = '/vehicles/' + Date.now() + `${selectedFile.name}`;
-      let iRef = storageRef.child(path);
-      iRef.put(selectedFile).then((snapshot) => {
-        loading.dismiss();
-        this.user.vehiclePhotoURL = snapshot.downloadURL;
-      });
-    }
-  }
-
   // show alert with message
   showAlert(message) {
     let alert = this.alertCtrl.create({
@@ -122,15 +107,78 @@ export class VehiclePage {
     alert.present();
   }
 
-  updateProfilePicture(picture: any = null): any {
-    /*return this.ProfilePictureRef.child(this.afAuth.auth.currentUser.uid)
-      .putString(picture, 'base64', { contentType: 'image/png' })
-      .then((savedPicture) => {
-        this.userProfile.child(this.afAuth.auth.currentUser.uid).update({
-      storage()
-          profilepicture: savedPicture.downloadURL
-        });
-      })*/
+  selectVehiculeImage() {
+    // SELECT IMAGE FROM LIBRARY
+    this.getPictureFromLibrary().then((imageData) => {
+
+      // CROP SELECTED IMAGE
+      //this.cropImage(imageData, 50, 300, 300).then((croppedImage) => {
+
+        // CAST PATH OF CROPPED IMAGE TO BLOB IMAGE
+        (<any>window).resolveLocalFileSystemURL(imageData, (res) => {
+          res.file((resFile) => {
+            var reader = new FileReader();
+            reader.readAsArrayBuffer(resFile);
+            reader.onloadend = (evt: any) => {
+              var imgBlob = new Blob([evt.target.result], { type: 'image/jpeg' });
+              console.log(imgBlob);
+
+              // UPLOAD CROPPED IMAGE AS A BLOB
+              try {
+                this.uploadImage(imgBlob);
+              }
+              catch (err) {
+                //this.showAlert("Se produjo un error al cargar la imagen");
+              }
+            }
+          })
+        }), (err) => {
+          //this.showAlert("Se produjo un error al convertir la imagen");
+        }
+      }, (err) => {
+        //this.showAlert("Se profujo un error al recortar la imagen");
+      });
+
+/*     }, (err) => {
+      //this.showAlert("Se produjo un error al seleccionar la imagen");
+    }); */
+
+  }
+
+
+  getPictureFromLibrary() {
+    const options: CameraOptions = {
+      quality: 50,
+      destinationType: this.camera.DestinationType.NATIVE_URI,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
+    }
+    return this.camera.getPicture(options);
+  }
+
+  cropImage(image: string, quality: number, targetHeight: number, targetWidth: number) {
+    return this.crop.crop(image, { quality, targetHeight, targetWidth });
+  }
+
+  uploadImage(image: Blob) {
+    let storageRef = firebase.storage().ref();
+    let loading = this.loadingCtrl.create({
+      content: 'Subiendo imagen, por favor espere...'
+    });
+    loading.present();
+    let path = '/vehicles/' + 'Vehicle_' + this.uid;
+    let iRef = storageRef.child(path);
+
+    iRef.put(image).then((snapshot) => {
+      loading.dismiss();
+      this.user.vehiclePhotoURL = snapshot.downloadURL;
+    });
+  }
+
+  getBackground(image) {
+    console.log(`url(${image})`)
+    return this._sanitizer.bypassSecurityTrustStyle(`url(${image})`);
   }
 
 }

@@ -20,6 +20,8 @@ import { UserPage } from '../pages/user/user';
 import { DriverService } from '../services/driver-service';
 import { SettingsPage } from '../pages/settings/settings';
 import { ProfilePage } from '../pages/profile/profile';
+import { DomSanitizer } from '@angular/platform-browser';
+
 @Component({
   templateUrl: 'app.html',
   queries: {
@@ -27,6 +29,8 @@ import { ProfilePage } from '../pages/profile/profile';
   }
 })
 export class MyApp {
+  apellido: any;
+  name: any;
   originalCoords: any;
   rootPage: any;
   nav: any;
@@ -53,14 +57,14 @@ export class MyApp {
       count: 0,
       component: JobHistoryPage
     },
-    {
+/*     {
       title: 'Configuración',
       icon: 'settings',
       count: 0,
       component: SettingsPage
-    },
+    }, */
     {
-      title: 'Soporte',
+      title: 'Reportar Fallas',
       icon: 'ios-help-circle-outline',
       count: 0,
       component: SupportPage
@@ -68,15 +72,16 @@ export class MyApp {
   ];
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public placeService: PlaceService,
-    afAuth: AngularFireAuth, public authService: AuthService, public tripService: TripService, 
-    public driverService: DriverService, private toastCtrl: ToastController, private localNotifications: LocalNotifications) {
+    afAuth: AngularFireAuth, public authService: AuthService, public tripService: TripService,
+    public driverService: DriverService, private toastCtrl: ToastController, private localNotifications: LocalNotifications, 
+    private _sanitizer: DomSanitizer) {
 
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
-
+     
       // check for login stage, then redirect
       afAuth.authState.take(1).subscribe(authData => {
         if (authData) {
@@ -113,12 +118,17 @@ export class MyApp {
           driverService.setUser(this.user);
           driverService.getDriver().subscribe(snapshot => {
             this.driver = snapshot;
+            this.name = this.driver.name;
+            this.apellido = this.driver.plastname;
+            
           });
         } else {
           this.driver = null;
         }
       });
     });
+
+    
   }
 
 
@@ -135,13 +145,13 @@ export class MyApp {
 
 
 
-  showNotification(originalCoords) {
+/*   showNotification(originalCoords) {
     this.localNotifications.schedule({
       text: originalCoords
     });
 
     //this.notificationAlreadyReceived = true;
-  }
+  } */
 
 
   /**
@@ -170,5 +180,10 @@ export class MyApp {
       position: 'top'
     });
     toast.present();
+  }
+
+  getBackground(image) {
+    console.log(`url(${image})`)
+    return this._sanitizer.bypassSecurityTrustStyle(`url(${image})`);
   }
 }

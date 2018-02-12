@@ -25,10 +25,16 @@
           <span ion-text color="light">{{ trip.destination.vicinity }}</span>
         </div>
       </ion-item>
+      <ion-item class="round" margin-topc (click)="navigate(trip.destination.vicinity)">
+        <span item-right>Navegar</span>
+        <button ion-button icon-left clear item-end>
+          <ion-icon name="navigate"></ion-icon>
+        </button>
+      </ion-item>
     </ion-list>
   </div>
 
   <div class="bottom-buttons full-width" padding>
-    <button ion-button block color="secondary" (click)="showPayment()">PAGO</button>
+    <button ion-button block color="secondary" (click)="showPayment()">VIAJE FINALIZADO</button>
   </div>
 </ion-content>

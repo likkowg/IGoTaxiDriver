@@ -1,29 +1,53 @@
 <ion-menu [content]="content">
 
-    <ion-content class="menu-left">
-      <!-- User profile -->
-      <div text-center padding-top padding-bottom class="primary-bg menu-left">
-        <a>
-          <img class="profile-picture" src="{{ user.photoURL }}">
-          <h4 ion-text color="light">{{ user.displayName }}</h4>
-          <button ion-button clear ion-button menuToggle (click)="viewProfile()" color="secondary"> Editar Perfil</button>
-        </a>
-      </div>
-  
-      <ion-list class="list-full-border">
-        <button ion-item menuClose *ngFor="let page of pages" (click)="openPage(page)">
-          <ion-icon item-left name="{{ page.icon }}"></ion-icon>
-          {{ page.title }}
-          <ion-badge danger item-right *ngIf="page.count">{{ page.count }}</ion-badge>
+  <ion-content class="menu-left">
+    <!-- User profile -->
+    <!--     <div text-center padding-top padding-bottom class="primary-bg menu-left">
+      <a>
+        <img class="profile-picture" src="{{ user.photoURL }}">
+        <div>
+
+            <ion-icon item-left primary name="person"></ion-icon>
+            <button ion-button clear large ion-button menuToggle item-end (click)="viewProfile()" color="secondary"> Editar Perfil 
+              <ion-icon name="arrow-forward"></ion-icon>
+            </button>
+
+        </div>
+      </a>
+    </div> -->
+
+    <div class="main-left-menu" [style.background-image]="getBackground(user.photoURL)">
+      <!-- <span>{{ user.photoURL || async}}</span>
+      <span>{{ user.name || async}}</span>
+      <span>{{ user.plastname || async}}</span> -->
+      <!--       <div class="botton-menu-bg">
+        <span >{{ name | uppercase}} {{ apellido | uppercase}}asdasd</span>
+      </div> -->
+      <ion-item class="botton-menu-bg">
+        <span>
+          {{ name | uppercase}} {{ apellido | uppercase}}
+        </span>
+        <button ion-button clear item-end icon-left large menuToggle (click)="viewProfile()">
+          <ion-icon name="md-create"></ion-icon>
         </button>
-        <button ion-item menuClose (click)="logout()">
-          <ion-icon item-left name="ios-exit-outline"></ion-icon>
-          Salir
-        </button>
-      </ion-list>
-    </ion-content>
-  
-  </ion-menu>
-  
-  <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
-  
+      </ion-item>
+    </div>
+
+
+
+    <ion-list class="list-full-border">
+      <button ion-item menuClose *ngFor="let page of pages" (click)="openPage(page)">
+        <ion-icon item-left name="{{ page.icon }}"></ion-icon>
+        {{ page.title }}
+        <ion-badge danger item-right *ngIf="page.count">{{ page.count }}</ion-badge>
+      </button>
+      <button ion-item menuClose (click)="logout()">
+        <ion-icon item-left name="ios-exit-outline"></ion-icon>
+        Salir
+      </button>
+    </ion-list>
+  </ion-content>
+
+</ion-menu>
+
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

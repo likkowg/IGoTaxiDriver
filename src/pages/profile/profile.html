@@ -5,41 +5,115 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>Profile</ion-title>
+  <ion-navbar color="primary">
+    <ion-title>Perfil</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="save()">
+        <ion-icon name="checkmark"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
-
 </ion-header>
 
+<ion-content parallax-header>
 
-<ion-content parallax>
-  <div class="bg">
-    <img src="{{ user.photoURL }}" alt="">
-  </div>
+  <div class="header-image"></div>
 
-  <div class="main-cnt">
-    <img src="{{ user.photoURL }}" class="dp">
-    <h1 text-center>Siri</h1>
-    <ion-list no-lines>
-      <ion-item>
-        <ion-icon name="contacts" item-start></ion-icon>
-        28 Friends
-        <ion-icon name="arrow-dropright" item-end></ion-icon>
-      </ion-item>
-      <ion-item>
-        <ion-icon name="logo-facebook" item-start></ion-icon>
-        UserName: Hasnen Tai
-        <p>www.facebook.com/hasnen.tai</p>
-        <ion-icon name="arrow-dropright" item-end></ion-icon>
-      </ion-item>
-      <ion-item>
-        <ion-icon name="logo-instagram" item-start></ion-icon>
-        UserName: void_nen_
-        <p>www.instagram.com/void_nen_</p>
-        <ion-icon name="arrow-dropright" item-end></ion-icon>
-      </ion-item>
-    </ion-list>
-    <button ion-button (click)="cropImg()">Crop</button>
+  <div class="main-content">
+    <img src="{{ user.photoURL }}" class="dp" (click)="selectProfilePicture()">
+    <!-- <h1 text-center>{{user?.name}} {{user?.plastname}}</h1> -->
+    <ion-item>
+      <ion-icon item-left primary name="person"></ion-icon>
+      <ion-label stacked color="primary">Nombre</ion-label>
+      <ion-input type="text" [(ngModel)]="user.name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon item-left primary name="man"></ion-icon>
+      <ion-label stacked color="primary">Apellido Paterno</ion-label>
+      <ion-input type="text" [(ngModel)]="user.plastname"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon item-left primary name="woman"></ion-icon>
+      <ion-label stacked color="primary">Apellido Materno</ion-label>
+      <ion-input type="text" [(ngModel)]="user.mlastname"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon item-left primary name="call"></ion-icon>
+      <ion-label stacked color="primary">Telefono</ion-label>
+      <ion-input type="text" [(ngModel)]="user.phoneNumber"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon item-left primary name="ios-card-outline"></ion-icon>
+      <ion-label stacked color="primary">DNI</ion-label>
+      <ion-input type="text" [(ngModel)]="user.dni"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon item-left primary name="mail"></ion-icon>
+      <ion-label stacked color="primary">Email</ion-label>
+      <ion-input type="text" [(ngModel)]="user.email" disabled></ion-input>
+    </ion-item>
+
+    <ion-item (click)="ToVehicle()">
+      <ion-icon item-left primary name="car"></ion-icon>
+      <h2>Vehiculo</h2>
+      <button (click)="ToVehicle()" ion-button clear item-end>
+        <ion-icon name="arrow-forward"></ion-icon>
+      </button>
+    </ion-item>
   </div>
 </ion-content>
+
+<!-- Segment in a header -->
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="icons" color="secondary">
+      <ion-segment-button value="camera">
+        <ion-icon name="camera"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="bookmark">
+        <ion-icon name="bookmark"></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header> -->
+
+<!-- <ion-content>
+
+  <div padding>
+    <ion-segment [(ngModel)]="pet">
+      <ion-segment-button value="kittens">
+        Kittens
+      </ion-segment-button>
+      <ion-segment-button value="puppies">
+        Puppies
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+  
+  <div [ngSwitch]="pet">
+    <ion-list *ngSwitchCase="'puppies'">
+      <ion-item>
+        <ion-thumbnail item-start>
+          <img src="img/thumbnail-puppy-1.jpg">
+        </ion-thumbnail>
+        <h2>Ruby</h2>
+      </ion-item>
+      ...
+    </ion-list>
+  
+    <ion-list *ngSwitchCase="'kittens'">
+      <ion-item>
+        <ion-thumbnail item-start>
+          <img src="img/thumbnail-kitten-1.jpg">
+        </ion-thumbnail>
+        <h2>Luna</h2>
+      </ion-item>
+      ...
+    </ion-list>
+  </div>
+</ion-content> -->

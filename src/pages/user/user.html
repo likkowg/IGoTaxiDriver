@@ -38,50 +38,50 @@
     <ion-grid>
       <ion-col>
         <ion-row>
-          <ion-item>
-            <ion-icon item-left primary name="person"></ion-icon>
-            <ion-label stacked color="primary">Nombre</ion-label>
-            <ion-input type="text" [(ngModel)]="user.name"></ion-input>
-          </ion-item>
-        </ion-row>
-        <ion-row>
-          <ion-col col-6>
             <ion-item>
-              <ion-icon item-left primary name="man"></ion-icon>
-              <ion-label stacked color="primary">Apellido Paterno</ion-label>
-              <ion-input type="text" [(ngModel)]="user.plastname"></ion-input>
+              <ion-icon item-left primary name="person"></ion-icon>
+              <ion-label stacked color="primary">Nombre</ion-label>
+              <ion-input type="text" [(ngModel)]="user.name"></ion-input>
             </ion-item>
-          </ion-col>
-          <ion-col col-6>
+          </ion-row>
+          <ion-row>
+            <ion-col col-6>
+              <ion-item>
+                <ion-icon item-left primary name="man"></ion-icon>
+                <ion-label stacked color="primary">Apellido Paterno</ion-label>
+                <ion-input type="text" [(ngModel)]="user.plastname"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col col-6>
+              <ion-item>
+                <ion-icon item-left primary name="woman"></ion-icon>
+                <ion-label stacked color="primary">Apellido Materno</ion-label>
+                <ion-input type="text" [(ngModel)]="user.mlastname"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-6>
+              <ion-item>
+                <ion-icon item-left primary name="call"></ion-icon>
+                <ion-label stacked color="primary">Telefono</ion-label>
+                <ion-input type="text" [(ngModel)]="user.phoneNumber"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col col-6>
+              <ion-item>
+                <ion-icon item-left primary name="ios-card-outline"></ion-icon>
+                <ion-label stacked color="primary">DNI</ion-label>
+                <ion-input type="text" [(ngModel)]="user.dni"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
             <ion-item>
-              <ion-icon item-left primary name="woman"></ion-icon>
-              <ion-label stacked color="primary">Apellido Materno</ion-label>
-              <ion-input type="text" [(ngModel)]="user.mlastname"></ion-input>
+              <ion-icon item-left primary name="mail"></ion-icon>
+              <ion-label stacked color="primary">Email</ion-label>
+              <ion-input type="text" [(ngModel)]="user.email" disabled></ion-input>
             </ion-item>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col col-6>
-            <ion-item>
-              <ion-icon item-left primary name="call"></ion-icon>
-              <ion-label stacked color="primary">Telefono</ion-label>
-              <ion-input type="text" [(ngModel)]="user.phoneNumber"></ion-input>
-            </ion-item>
-          </ion-col>
-          <ion-col col-6>
-            <ion-item>
-              <ion-icon item-left primary name="ios-card-outline"></ion-icon>
-              <ion-label stacked color="primary">DNI</ion-label>
-              <ion-input type="text" [(ngModel)]="user.dni"></ion-input>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-item>
-            <ion-icon item-left primary name="mail"></ion-icon>
-            <ion-label stacked color="primary">Email</ion-label>
-            <ion-input type="text" [(ngModel)]="user.email" disabled></ion-input>
-          </ion-item>
         </ion-row>
         <ion-row>
           <ion-item>
@@ -91,6 +91,7 @@
               <ion-icon name="arrow-forward"></ion-icon>
             </button>
           </ion-item>
+          <button ion-button (click)="resize()">Resize</button>
         </ion-row>
       </ion-col>
     </ion-grid>

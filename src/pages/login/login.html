@@ -14,7 +14,7 @@
 
 
 <ion-content>
-  <div text-center class="buttons">
+  <!--   <div text-center class="buttons">
     <p> Ingresa con tus redes sociales</p>
     <button ion-button icon-only class="fb" color="fb-color" outline large (click)="loginWithFacebook()">
       <ion-icon name="logo-facebook"></ion-icon>
@@ -28,7 +28,11 @@
     <p>
       Ingresa con tu email y contraseña
     </p>
+  </div> -->
+
+  <div class="half-bg">
   </div>
+  
 
   <div class="form">
     <ion-item>
@@ -38,7 +42,7 @@
 
     </ion-item>
     <ion-item>
-        <ion-icon item-left primary name="eye-off"></ion-icon>
+      <ion-icon item-left primary name="eye-off"></ion-icon>
       <ion-label floating primary>Contraseña</ion-label>
       <ion-input type="password" [(ngModel)]="password"></ion-input>
     </ion-item>

@@ -10,6 +10,7 @@ import { AuthService } from "../../services/auth-service";
 import { LocationTrackerProvider } from '../../providers/location-tracker/location-tracker';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { ReportService } from '../../services/report-service';
+import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
 
 
 @Component({
@@ -20,7 +21,7 @@ export class HomePage {
   driver: any;
   deal: any;
   dealSubscription: any;
-  isOnline: boolean;
+  isOnline: boolean = true;
   public stats: any = {
     today: 0,
     yesterday: 0,
@@ -33,8 +34,10 @@ export class HomePage {
   constructor(public nav: NavController, public driverService: DriverService, public modalCtrl: ModalController,
     public alertCtrl: AlertController, public dealService: DealService, public authService: AuthService,
     public locationTracker: LocationTrackerProvider, public localNotifications: LocalNotifications,
-    public reportService: ReportService) {
+    public reportService: ReportService, private launchNavigator: LaunchNavigator) {
 
+   // this.isOnline ? this.start() : this.stop();
+    this.statusChanged();
     //this.isOnline = false;
     if (this.dealSubscription) {
       this.dealSubscription.unsubscribe();
@@ -75,7 +78,7 @@ export class HomePage {
     });
 
 
-    reportService.getAll().take(1).subscribe(snapshot => {
+/*     reportService.getAll().take(1).subscribe(snapshot => {
       let today = new Date();
       let lastYear = today.getFullYear() - 1;
       let lastMonth = (today.getMonth() > 0) ? today.getMonth() : 12;
@@ -115,7 +118,7 @@ export class HomePage {
         && snapshot[yesterday.getFullYear()][yesterday.getMonth() + 1][yesterday.getDate()]) {
         this.stats.yesterday = snapshot[yesterday.getFullYear()][yesterday.getMonth() + 1][yesterday.getDate()].total;
       }
-    });
+    }); */
 
 
   }
@@ -123,7 +126,7 @@ export class HomePage {
   ionViewWillLeave() {
     if (this.dealSubscription) {
       // unsubscribe when leave this page
-      //this.dealSubscription.unsubscribe();
+      this.dealSubscription.unsubscribe();
     }
   }
 
@@ -135,7 +138,7 @@ export class HomePage {
   // confirm a job
   confirmJob() {
     let confirm = this.alertCtrl.create({
-      title: 'Are you sure?',
+      title: '¿Esta seguro de aceptar este trabajo?',
       buttons: [
         {
           text: 'No',
@@ -145,7 +148,7 @@ export class HomePage {
           }
         },
         {
-          text: 'Yes',
+          text: 'Si',
           handler: () => {
             this.dealService.acceptDeal(this.driver.$key, this.deal).then(() => {
               // go to pickup page
@@ -159,7 +162,7 @@ export class HomePage {
   }
 
   // listen to deals
-  watchDeals() {
+   watchDeals() {
     // listen to deals
     this.dealSubscription = this.dealService.getDeal(this.driver.$key).subscribe(snapshot => {
 
@@ -204,14 +207,32 @@ export class HomePage {
 
 
   statusChanged() {
-    this.isOnline ? this.start() : this.stop();
+    //this.isOnline ? this.start() : this.stop();
     console.log(this.isOnline);
+    
   }
 
 
   showNotification(msg) {
     this.localNotifications.schedule({
-      text: msg
+      text: msg,
+      badge: 1,
     });
+  }
+
+  navigate(latitude?: string, longitute?: string) {
+     let options: LaunchNavigatorOptions = {
+      //start: 'London, ON',
+      transportMode: this.launchNavigator.TRANSPORT_MODE.TRANSIT,
+      //app: this.launchNavigator.APP.UBER
+    }; 
+
+    let coordenates: string = latitude + ", " + longitute;
+    console.log(coordenates);
+     this.launchNavigator.navigate('-12.051743806888501, -77.09793090820312', options)
+      .then(
+      success => console.log('Launched navigator'),
+      error => console.log('Error launching navigator', error)
+      );
   }
 }

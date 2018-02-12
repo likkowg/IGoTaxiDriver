@@ -1,45 +1,31 @@
-    .ios,.md{
-        page-profile {
-            .bg{
-               // background-image: url('../assets/img/MainBack.jpg');
-                height: 300px;
-                background-size: cover;
-                filter: blur(5px);
-                //background-position: center center;
-                vertical-align: middle;
-                background-color: #000000;
-                img{
-                    background-position: center center;
-                    vertical-align: middle;
-                    //height: 100%;
-                }
-            }
-
-            .main-cnt{
-                width: 100%;
-                height: 700px;
-                padding:20px;
-                
-            }
-            .dp{
-                border-radius: 50%;
-                height: 200px;
-                width: 200px;
-                z-index: 10;
-                margin-top:-70px;
-                position: relative;
-                left:50%;
-                margin-right:-50%;
-                transform: translate(-50%,-50%);
-                box-shadow: -6px 15px 81px 3px rgba(0,0,0,0.75);
-                background-size: cover;
-            }
-            ion-list ion-item{
-                color:red;
-                background-color: #ecf0f1;
-                border-radius: 10px;
-                margin-bottom: 10px;
-            }
-    
+  page-profile {
+    .header-image {
+        background-image: url("../assets/img/MainBack.jpg");
+        height:40vh;
+        filter: blur(5px);
     }
+     
+    .main-content {
+        padding: 20px;
+        background-color: white;
+        width: 100%
     }
+    .dp{
+        border: 6px solid #dfdfdf;
+        border-radius: 50%;
+        height: 40vw;
+        width: 40vw;
+        max-height: 300px;
+        max-width: 300px;
+        z-index: 10;
+        margin-top:-800px;
+        position: relative;
+        left:50%;
+        margin-right:-50%;
+        transform: translate(-50%,0%);
+        box-shadow: -3px 10px 50px 3px rgba(0,0,0,0.75);
+        background-size: cover;
+        background-color: #ecf0f1;
+    }  
+}
+   
