@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController} from 'ionic-angular';
+import { IonicPage, NavController, MenuController} from 'ionic-angular';
 import { AuthService } from '../../services/auth-service';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { LoadingController } from 'ionic-angular/components/loading/loading-controller';
@@ -22,7 +22,7 @@ export class LoginPage {
   password: any;
 
   constructor(public nav: NavController, public authService: AuthService, public alertCtrl: AlertController,
-    public loadingCtrl: LoadingController) {
+    public loadingCtrl: LoadingController, private menuController: MenuController) {
 
   }
 
@@ -85,6 +85,16 @@ export class LoginPage {
       });
       alert.present();
     });
+  }
+
+  ionViewWillEnter() {
+    this.menuController.enable(false);
+    //this.navCtrl.swipeBackEnabled = false;
+  }
+
+  ionViewWillLeave() {
+    this.menuController.enable(true);
+    //this.navCtrl.swipeBackEnabled = true;
   }
 
 }

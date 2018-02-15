@@ -4,42 +4,53 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
+
+<ion-header no-border>
+  <ion-navbar transparent class="custom-nav-bar" color="gplus">
+  </ion-navbar>
+  <!-- <button ion-button>Back</button> -->
+
+  <!-- <div class="half-bg">
+  </div>   -->
+</ion-header>
 <ion-content>
   <ion-grid no-padding>
     <ion-col no-padding>
-      <ion-row class="up">
+<!--       <ion-row class="up">
         <div class="img">
         </div>
-      </ion-row>
+      </ion-row> -->
       <ion-row class="down">
-          <ion-slides autoplay=4000 loop=true effect="slide" pager="false">
-              <ion-slide >
-                <h1>
-                    <ion-icon name="people"></ion-icon>
-                </h1>
-                <p class="description">I GO está conformada por un equipo de excelentes profesionales, los cuales brindan un servicio de movilidad de de una manera
-                    responsable, responsable y eficiente.</p>
-              </ion-slide>
-              <ion-slide>
-                  <h1>
-                      <ion-icon name="desktop"></ion-icon>
-                  </h1>
-                <p class="description">I GO cuenta con conductores A1, aplicando exhaustivos controles para asi brindar una mayor seguridad a nuestros clientes.</p>
-              </ion-slide>
-              <ion-slide>
-                  <h1>
-                      <ion-icon name="car"></ion-icon>
-                  </h1>
-                <p class="description">Gracias por usar I GO Chiclayo.</p>
-              </ion-slide>
-            </ion-slides>
+        <ion-slides autoplay=4000 loop=true effect="slide" pager="false">
+          <ion-slide>
+            <h1>
+              <ion-icon name="people"></ion-icon>
+            </h1>
+            <p class="description">I GO está conformada por un equipo de excelentes profesionales, los cuales brindan un servicio de movilidad de
+              de una manera responsable, responsable y eficiente.</p>
+          </ion-slide>
+          <ion-slide>
+            <h1>
+              <ion-icon name="desktop"></ion-icon>
+            </h1>
+            <p class="description">I GO cuenta con conductores A1, aplicando exhaustivos controles para asi brindar una mayor seguridad a nuestros
+              clientes.
+            </p>
+          </ion-slide>
+          <ion-slide>
+            <h1>
+              <ion-icon name="car"></ion-icon>
+            </h1>
+            <p class="description">Gracias por usar I GO Chiclayo.</p>
+          </ion-slide>
+        </ion-slides>
 
       </ion-row>
     </ion-col>
   </ion-grid>
 </ion-content>
 
-<ion-footer>
+<ion-footer no-border>
   <div height="35%" padding>
     <button ion-button block (click)="ToLogin()">Ingresar</button>
     <button ion-button color="secondary" outline block (click)="ToRegister()">Registrar</button>

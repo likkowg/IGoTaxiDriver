@@ -183,7 +183,7 @@ export class MyApp {
   }
 
   getBackground(image) {
-    console.log(`url(${image})`)
+    //console.log(`url(${image})`)
     return this._sanitizer.bypassSecurityTrustStyle(`url(${image})`);
   }
 }

@@ -22,7 +22,7 @@ page-login-home {
     //border: 2px solid #128f74;
     height: 35;
     width: 100%;
-    padding-top: 0px;
+    padding-top: 50px;
     padding-right: 0px;
     padding-bottom: 0px;
     padding-left: 10px;
@@ -57,4 +57,19 @@ page-login-home {
     padding-left: 0px;
     }
 
+    .custom-nav-bar{
+        //background-image: url("http://i66.tinypic.com/v6htsz.jpg");
+        //background: url("../assets/img/MainBack.png") no-repeat center center fixed;
+        height: 40vh;
+        background-image: url("../assets/img/MainBack.png");
+        //height: 100%;
+        width: 100%;
+        background-repeat: no-repeat;
+        background-size: 100%;
+        display: inline-block;
+        border: 1px solid red;
+        position:relative;
+        color: #d34836;
+        padding-top: -160px;
+      }
 }

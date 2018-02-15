@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { RegisterPage } from '../register/register';
 
@@ -16,7 +16,7 @@ import { RegisterPage } from '../register/register';
 })
 export class LoginHomePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private menuController: MenuController) {
   }
 
   ionViewDidLoad() {
@@ -31,4 +31,13 @@ export class LoginHomePage {
     this.navCtrl.push(RegisterPage);
   }
 
+  ionViewWillEnter() {
+    this.menuController.enable(false);
+    //this.navCtrl.swipeBackEnabled = false;
+  }
+
+  ionViewWillLeave() {
+    this.menuController.enable(true);
+    //this.navCtrl.swipeBackEnabled = true;
+  }
 }

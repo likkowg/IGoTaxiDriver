@@ -4,18 +4,15 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
-
-  <ion-navbar>
-    <ion-title>Registro</ion-title>
+<ion-header no-border>
+  <ion-navbar transparent class="custom-nav-bar" color="gplus">
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content>
 
-<!--   <div text-center class="buttons">
+  <!--   <div text-center class="buttons">
     <p> Registrate con tus redes sociales</p>
     <button ion-button icon-center style="width:45%" large color="fb-color" (click)="loginWithFacebook()">
       <ion-icon name="logo-facebook"></ion-icon>
@@ -30,8 +27,10 @@
       Registrate con tu email y contraseña
     </p>
   </div> -->
-
-  <div class="half-bg">
+  <div style="margin: 0 auto; text-align: center">
+    <a class="main-text">Registro</a>
+    <a class="green">I</a>
+    <a class="blue">GO</a>
   </div>
 
   <div class="form">
@@ -55,7 +54,11 @@
 
   </div>
 
+
+</ion-content>
+
+<ion-footer no-border>
   <div padding>
     <button ion-button color="secondary" outline block (click)="signup()">Registrar</button>
   </div>
-</ion-content>
+</ion-footer>

@@ -66,7 +66,7 @@ export class LocationTrackerProvider {
 
     // Background Tracking
 
-    let config = {
+/*     let config = {
       desiredAccuracy: 0,
       stationaryRadius: 20,
       distanceFilter: 10,
@@ -92,10 +92,10 @@ export class LocationTrackerProvider {
 
       console.log(err);
 
-    });
+    }); */
 
     // Turn ON the background-geolocation system.
-    this.backgroundGeolocation.start();
+    //this.backgroundGeolocation.start();
 
 
     // Foreground Tracking
@@ -106,7 +106,7 @@ export class LocationTrackerProvider {
     };
 
     this.watch = this.geolocation.watchPosition(options).filter((p: any) => p.code === undefined).subscribe((position: Geoposition) => {
-
+console.log("Geo");
       console.log(position);
 
       // Run update inside of Angular's zone
@@ -125,7 +125,7 @@ export class LocationTrackerProvider {
     console.log('stopTracking');
 
     this.backgroundGeolocation.finish();
-    this.backgroundGeolocation.stop();
+    //this.backgroundGeolocation.stop();
     this.watch.unsubscribe();
     this.driverService.clearPositions(this.driver.$key, this.driver.type, "Peru")
   }

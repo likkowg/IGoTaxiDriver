@@ -36,14 +36,11 @@ export class HomePage {
     public locationTracker: LocationTrackerProvider, public localNotifications: LocalNotifications,
     public reportService: ReportService, private launchNavigator: LaunchNavigator) {
 
-   // this.isOnline ? this.start() : this.stop();
+    // this.isOnline ? this.start() : this.stop();
     this.statusChanged();
     //this.isOnline = false;
-    if (this.dealSubscription) {
-      this.dealSubscription.unsubscribe();
-    }
 
-
+    this.locationTracker.startTracking();
     /*this.backgroundMode.disable();
     this.backgroundMode.on('activate').subscribe(() => {
       this.showNotification("background!");
@@ -78,58 +75,61 @@ export class HomePage {
     });
 
 
-/*     reportService.getAll().take(1).subscribe(snapshot => {
-      let today = new Date();
-      let lastYear = today.getFullYear() - 1;
-      let lastMonth = (today.getMonth() > 0) ? today.getMonth() : 12;
-      let yesterday = new Date(Date.now() - 86400000);
-      let thisYear = today.getFullYear();
-      let thisMonth = today.getMonth() + 1;
-
-      // get current
-      if (snapshot[thisYear]) {
-        this.stats.thisYear = snapshot[thisYear].total;
-
-        if (snapshot[thisYear][thisMonth]) {
-          this.stats.thisMonth = snapshot[thisYear][thisMonth].total;
-
-          if (snapshot[thisYear][thisMonth][today.getDate()]) {
-            this.stats.today = snapshot[thisYear][thisMonth][today.getDate()].total;
+    /*     reportService.getAll().take(1).subscribe(snapshot => {
+          let today = new Date();
+          let lastYear = today.getFullYear() - 1;
+          let lastMonth = (today.getMonth() > 0) ? today.getMonth() : 12;
+          let yesterday = new Date(Date.now() - 86400000);
+          let thisYear = today.getFullYear();
+          let thisMonth = today.getMonth() + 1;
+    
+          // get current
+          if (snapshot[thisYear]) {
+            this.stats.thisYear = snapshot[thisYear].total;
+    
+            if (snapshot[thisYear][thisMonth]) {
+              this.stats.thisMonth = snapshot[thisYear][thisMonth].total;
+    
+              if (snapshot[thisYear][thisMonth][today.getDate()]) {
+                this.stats.today = snapshot[thisYear][thisMonth][today.getDate()].total;
+              }
+            }
+    
+            if ((lastMonth != 12) && snapshot[thisYear][lastMonth]) {
+              this.stats.lastMonth = snapshot[thisYear][lastMonth].total;
+            }
           }
-        }
-
-        if ((lastMonth != 12) && snapshot[thisYear][lastMonth]) {
-          this.stats.lastMonth = snapshot[thisYear][lastMonth].total;
-        }
-      }
-
-      // get last year & last month data
-      if (snapshot[lastYear]) {
-        this.stats.lastYear = snapshot[lastYear].total;
-
-        if ((lastMonth == 12) && snapshot[lastYear][lastMonth]) {
-          this.stats.lastMonth = snapshot[lastYear][lastMonth].total;
-        }
-      }
-
-      // get yesterday's data
-      if (snapshot[yesterday.getFullYear()]
-        && snapshot[yesterday.getFullYear()][yesterday.getMonth() + 1]
-        && snapshot[yesterday.getFullYear()][yesterday.getMonth() + 1][yesterday.getDate()]) {
-        this.stats.yesterday = snapshot[yesterday.getFullYear()][yesterday.getMonth() + 1][yesterday.getDate()].total;
-      }
-    }); */
+    
+          // get last year & last month data
+          if (snapshot[lastYear]) {
+            this.stats.lastYear = snapshot[lastYear].total;
+    
+            if ((lastMonth == 12) && snapshot[lastYear][lastMonth]) {
+              this.stats.lastMonth = snapshot[lastYear][lastMonth].total;
+            }
+          }
+    
+          // get yesterday's data
+          if (snapshot[yesterday.getFullYear()]
+            && snapshot[yesterday.getFullYear()][yesterday.getMonth() + 1]
+            && snapshot[yesterday.getFullYear()][yesterday.getMonth() + 1][yesterday.getDate()]) {
+            this.stats.yesterday = snapshot[yesterday.getFullYear()][yesterday.getMonth() + 1][yesterday.getDate()].total;
+          }
+        }); */
 
 
   }
 
   ionViewWillLeave() {
-    if (this.dealSubscription) {
       // unsubscribe when leave this page
-      this.dealSubscription.unsubscribe();
-    }
+      //this.locationTracker.stopTracking();
+     // this.dealSubscription.unsubscribe();
   }
 
+  ionViewDidLoad() {
+    //this.locationTracker.startTracking();
+    //this.dealSubscription.subscribe();
+  }
   // make array with range is n
   range(n) {
     return new Array(Math.round(n));
@@ -162,7 +162,7 @@ export class HomePage {
   }
 
   // listen to deals
-   watchDeals() {
+  watchDeals() {
     // listen to deals
     this.dealSubscription = this.dealService.getDeal(this.driver.$key).subscribe(snapshot => {
 
@@ -198,18 +198,18 @@ export class HomePage {
 
 
   start() {
-    this.locationTracker.startTracking();
+    //this.locationTracker.startTracking();
   }
 
   stop() {
-    this.locationTracker.stopTracking();
+    //this.locationTracker.stopTracking();
   }
 
 
   statusChanged() {
     //this.isOnline ? this.start() : this.stop();
     console.log(this.isOnline);
-    
+
   }
 
 
@@ -221,18 +221,19 @@ export class HomePage {
   }
 
   navigate(latitude?: string, longitute?: string) {
-     let options: LaunchNavigatorOptions = {
+    let options: LaunchNavigatorOptions = {
       //start: 'London, ON',
       transportMode: this.launchNavigator.TRANSPORT_MODE.TRANSIT,
       //app: this.launchNavigator.APP.UBER
-    }; 
+    };
 
     let coordenates: string = latitude + ", " + longitute;
     console.log(coordenates);
-     this.launchNavigator.navigate('-12.051743806888501, -77.09793090820312', options)
+    this.launchNavigator.navigate('-12.051743806888501, -77.09793090820312', options)
       .then(
-      success => console.log('Launched navigator'),
-      error => console.log('Error launching navigator', error)
+        success => console.log('Launched navigator'),
+        error => console.log('Error launching navigator', error)
       );
   }
+
 }

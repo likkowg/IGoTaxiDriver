@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, LoadingController, AlertController } from 'ionic-angular';
+import { NavController, LoadingController, AlertController, MenuController } from 'ionic-angular';
 import { HomePage } from "../home/home";
 import { AuthService } from "../../services/auth-service";
 import { IonicPage } from 'ionic-angular/navigation/ionic-page';
@@ -22,7 +22,7 @@ export class RegisterPage {
   mlastname: any;
 
   constructor(public nav: NavController, public authService: AuthService, public alertCtrl: AlertController,
-              public loadingCtrl: LoadingController) {
+              public loadingCtrl: LoadingController, private menuController: MenuController) {
   }
 
   signup() {
@@ -81,6 +81,16 @@ export class RegisterPage {
       });
       alert.present();
     });
+  }
+
+  ionViewWillEnter() {
+    this.menuController.enable(false);
+    //this.navCtrl.swipeBackEnabled = false;
+  }
+
+  ionViewWillLeave() {
+    this.menuController.enable(true);
+    //this.navCtrl.swipeBackEnabled = true;
   }
 
 }
