@@ -4,32 +4,29 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
 
-  <ion-navbar color="primary">
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Vehiculo</ion-title>
-    <ion-buttons end>
-      <button ion-button (click)="save()">
-        <ion-icon name="checkmark"></ion-icon>
-      </button>
-    </ion-buttons>
+
+<ion-header no-border>
+  <ion-navbar transparent class="custom-nav-bar" color="gplus">
+
   </ion-navbar>
-
 </ion-header>
 
 
-<ion-content parallax-header>
+<ion-content>
 
-  <div class="header-image" (click)="selectVehiculeImage()"></div>
 
   <div class="main-content">
-<!--     <img src="{{ user.vehiclePhotoURL }}" class="dp" (click)="selectVehiculeImage()"> -->
+    <!--     <img src="{{ user.vehiclePhotoURL }}" class="dp" (click)="selectVehiculeImage()"> -->
 
-<!--     <h1 text-center>{{user?.brand}} {{user?.model}}</h1> -->
-<img src="{{ user.vehiclePhotoURL }}" class="dp" (click)="selectProfilePicture()">
+    <!--     <h1 text-center>{{user?.brand}} {{user?.model}}</h1> -->
+    <div padding style="margin: 0 auto; text-align: center">
+        <a class="main-text">Perfil</a>&nbsp;
+        <a class="green">   I</a>
+        <a class="blue">GO</a>
+      </div>
+
+    <img src="{{ user.vehiclePhotoURL }}" class="dp" (click)="selectVehiculeImage()">
     <ion-item>
       <ion-icon item-left primary name="md-easel"></ion-icon>
       <ion-label stacked color="primary">Placa</ion-label>
@@ -102,4 +99,11 @@
     </ion-item>
  
   </ion-list> -->
+
+  <ion-buttons text-center>
+      <div padding>
+        <button block ion-button (click)="save()">Guardar
+        </button>
+      </div>
+    </ion-buttons>
 </ion-content>

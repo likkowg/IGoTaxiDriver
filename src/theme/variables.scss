@@ -36,6 +36,7 @@ $colors: (
   border-color: #E9EBEB
 );
 
+
 // App Theme
 // --------------------------------------------------
 // Ionic apps can have different themes applied, which can
@@ -52,3 +53,15 @@ $colors: (
 
 $ionicons-font-path: "../assets/fonts";
 @import "ionic.ionicons";
+
+
+$toolbar-order-ios:	(
+      content: 0,
+      back-button: 1,
+      menu-toggle-start: 2, 
+      buttons-left: 3, 
+      buttons-start: 4, 
+      buttons-end: 5, 
+      buttons-right: 6, 
+      menu-toggle-end: 7
+)

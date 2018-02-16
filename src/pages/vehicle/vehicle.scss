@@ -20,7 +20,7 @@ page-vehicle {
         padding: 20px;
         background-color: white;
         width: 100%;
-        height:30vh;
+        //height:30vh;
     }
     .dp{
         border: 6px solid #dfdfdf;
@@ -30,7 +30,7 @@ page-vehicle {
         max-height: 300px;
         max-width: 600px;
         z-index: 10;
-        margin-top:-800px;
+        margin-top: 0px;
         position: relative;
         left:50%;
         margin-right:-50%;
@@ -54,5 +54,47 @@ page-vehicle {
         //min-height: 100%
         height: 30vh;
     }
+
+    .custom-nav-bar{
+        //background-image: url("http://i66.tinypic.com/v6htsz.jpg");
+        //background: url("../assets/img/MainBack.png") no-repeat center center fixed;
+        height: 40vh;
+        background-image: url("../assets/img/MainBack.png");
+        //height: 100%;
+        //background: transparent;
+        width: 100%;
+        background-size: cover;
+        background-position: center center fixed;
+        //background-repeat: no-repeat;
+        //background-size: 100%;
+        display: inline-block;
+        //border: 1px solid red;
+        //position:relative;
+        //color: #3639d3;
+        //padding-top: -160px;
+    }
+
+        .main-text{
+            color: color($colors, secondary);
+            text-align: center;
+            font-size: 200%;
+            font-weight: 450;
+        }
+        .green{
+            color:color($colors, secondary);
+            text-align: center;
+            font-size: 200%;
+            font-weight: 450;
+        }
+        .blue{
+            color: #428ac5;
+            text-align: center;
+            font-size: 200%;
+            font-weight: 450;
+        }
+        .center{
+            text-align: center;
+        }
+
       
 }

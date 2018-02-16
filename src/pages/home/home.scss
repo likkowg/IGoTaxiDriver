@@ -39,14 +39,17 @@ page-home,
                 height: 40vh;
                 background-image: url("../assets/img/MainBack.png");
                 //height: 100%;
+                //background: transparent;
                 width: 100%;
-                background-repeat: no-repeat;
-                background-size: 100%;
+                background-size: cover;
+                background-position: center center fixed;
+                //background-repeat: no-repeat;
+                //background-size: 100%;
                 display: inline-block;
                 //border: 1px solid red;
-                position:relative;
-                //color: #d34836;
-                padding-top: -160px;
+                //position:relative;
+                //color: #3639d3;
+                //padding-top: -160px;
             }
         
                 .main-text{
